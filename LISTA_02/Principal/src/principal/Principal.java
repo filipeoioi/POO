@@ -1,5 +1,7 @@
 package principal;
 
+import java.util.ArrayList;
+
 public class Principal {
     
     public interface IComodo{
@@ -77,6 +79,79 @@ public class Principal {
         public void setQtdePanelas(int qtdePanelas) {
             this.qtdePanelas = qtdePanelas;
         }
+    }
+    
+    public class Padaria{
+        private String nome;
+        private String dono;
+        private String endereco;
+        private float vendasMensais;
+        private int qtdeMaxPaes;
+        private int qtdeFuncionarios;
+        ArrayList<Cozinha> cozinha;
+        ArrayList<Restaurante> restaurante;
+
+        public Padaria(String nome, String dono, String endereco, float vendasMensais, int qtdeMaxPaes, int qtdeFuncionarios, ArrayList<Cozinha> cozinha, ArrayList<Restaurante> restaurante) {
+            this.nome = nome;
+            this.dono = dono;
+            this.endereco = endereco;
+            this.vendasMensais = vendasMensais;
+            this.qtdeMaxPaes = qtdeMaxPaes;
+            this.qtdeFuncionarios = qtdeFuncionarios;
+            this.cozinha = cozinha;
+            this.restaurante = restaurante;
+        }
+
+        public String getNome() {
+            return nome;
+        }
+        public void setNome(String nome) {
+            this.nome = nome;
+        }
+        public String getDono() {
+            return dono;
+        }
+        public void setDono(String dono) {
+            this.dono = dono;
+        }
+        public String getEndereco() {
+            return endereco;
+        }
+        public void setEndereco(String endereco) {
+            this.endereco = endereco;
+        }
+        public float getVendasMensais() {
+            return vendasMensais;
+        }
+        public void setVendasMensais(float vendasMensais) {
+            this.vendasMensais = vendasMensais;
+        }
+        public int getQtdeMaxPaes() {
+            return qtdeMaxPaes;
+        }
+        public void setQtdeMaxPaes(int qtdeMaxPaes) {
+            this.qtdeMaxPaes = qtdeMaxPaes;
+        }
+        public int getQtdeFuncionarios() {
+            return qtdeFuncionarios;
+        }
+        public void setQtdeFuncionarios(int qtdeFuncionarios) {
+            this.qtdeFuncionarios = qtdeFuncionarios;
+        }
+        public ArrayList<Cozinha> getCozinha() {
+            return cozinha;
+        }
+        public void setCozinha(ArrayList<Cozinha> cozinha) {
+            this.cozinha = cozinha;
+        }
+        public ArrayList<Restaurante> getRestaurante() {
+            return restaurante;
+        }
+        public void setRestaurante(ArrayList<Restaurante> restaurante) {
+            this.restaurante = restaurante;
+        }
+        
+        
     }
     
     public void iniciar(){
