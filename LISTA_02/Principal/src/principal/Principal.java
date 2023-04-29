@@ -38,8 +38,18 @@ public class Principal {
     public class Restaurante extends Comodo{
         private int qtdeCadeiras;
         private int qtdeMesas;
-        
+
+        public Restaurante() {
+            this.qtdeCadeiras = 0;
+            this.qtdeMesas = 0;
+        }
         public Restaurante(int qtdeCadeiras, int qtdeMesas) {
+            super();
+            this.qtdeCadeiras = qtdeCadeiras;
+            this.qtdeMesas = qtdeMesas;
+        }
+        public Restaurante(int qtdeCadeiras, int qtdeMesas, String nome) {
+            super(nome);
             this.qtdeCadeiras = qtdeCadeiras;
             this.qtdeMesas = qtdeMesas;
         }
@@ -56,17 +66,33 @@ public class Principal {
         public void setQtdeMesas(int qtdeMesas) {
             this.qtdeMesas = qtdeMesas;
         }
+
+        @Override
+        public String toString() {
+            return "Restaurante{" + "qtdeCadeiras=" + this.getQtdeCadeiras() + ", qtdeMesas=" + this.getQtdeMesas() + '}';
+        }
     }
     
     public class Cozinha extends Comodo{
         private int tiposRefeicao;
         private int qtdePanelas;
 
+        public Cozinha() {
+            super();
+            this.qtdePanelas = 0;
+            this.tiposRefeicao = 0;
+        }
         public Cozinha(int tiposRefeicao, int qtdePanelas) {
+            super();
             this.tiposRefeicao = tiposRefeicao;
             this.qtdePanelas = qtdePanelas;
         }
-
+        public Cozinha(int tiposRefeicao, int qtdePanelas, String nome) {
+            super(nome);
+            this.tiposRefeicao = tiposRefeicao;
+            this.qtdePanelas = qtdePanelas;
+        }
+        
         public int getTiposRefeicao() {
             return tiposRefeicao;
         }
@@ -78,6 +104,11 @@ public class Principal {
         }
         public void setQtdePanelas(int qtdePanelas) {
             this.qtdePanelas = qtdePanelas;
+        }
+
+        @Override
+        public String toString() {
+            return "Cozinha{" + "tiposRefeicao=" + this.tiposRefeicao + ", qtdePanelas=" + this.getQtdePanelas() + '}';
         }
     }
     
@@ -91,6 +122,14 @@ public class Principal {
         ArrayList<Cozinha> cozinha;
         ArrayList<Restaurante> restaurante;
 
+        public Padaria() {
+            this.nome = "";
+            this.dono = "";
+            this.endereco = "";
+            this.vendasMensais = 0;
+            this.qtdeMaxPaes = 0;
+            this.qtdeFuncionarios = 0;
+        }
         public Padaria(String nome, String dono, String endereco, float vendasMensais, int qtdeMaxPaes, int qtdeFuncionarios, ArrayList<Cozinha> cozinha, ArrayList<Restaurante> restaurante) {
             this.nome = nome;
             this.dono = dono;
@@ -150,12 +189,28 @@ public class Principal {
         public void setRestaurante(ArrayList<Restaurante> restaurante) {
             this.restaurante = restaurante;
         }
-        
-        
+
+        @Override
+        public String toString() {
+            return "Padaria{" + "nome=" + nome + ", dono=" + dono + ", endereco=" + endereco + ", vendasMensais=" + vendasMensais + ", qtdeMaxPaes=" + qtdeMaxPaes + ", qtdeFuncionarios=" + qtdeFuncionarios + ", cozinha=" + cozinha + ", restaurante=" + restaurante + '}';
+        }
     }
     
     public void iniciar(){
+        ArrayList<Comodo> lista = new ArrayList<>();
+        Comodo cozinha1 = new Cozinha(5, 12);
+        Comodo cozinha2 = new Cozinha(2, 10);
+        Comodo restaurante1 = new Restaurante(12, 6);
+        Comodo restaurante2 = new Restaurante(24, 12);
         
+        lista.add(cozinha1);
+        lista.add(restaurante1);
+        lista.add(cozinha2);
+        lista.add(restaurante2);
+        
+        for (Comodo comodo : lista){
+            System.out.println(comodo);
+        }
     }
     
     public static void main(String[] args) {
