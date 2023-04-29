@@ -37,11 +37,6 @@ public class Principal {
         private int qtdeCadeiras;
         private int qtdeMesas;
         
-        public Restaurante(String nome, int qtdeCadeiras, int qtdeMesas) {
-            super(nome);
-            this.qtdeCadeiras = qtdeCadeiras;
-            this.qtdeMesas = qtdeMesas;
-        }
         public Restaurante(int qtdeCadeiras, int qtdeMesas) {
             this.qtdeCadeiras = qtdeCadeiras;
             this.qtdeMesas = qtdeMesas;
@@ -58,6 +53,29 @@ public class Principal {
         }
         public void setQtdeMesas(int qtdeMesas) {
             this.qtdeMesas = qtdeMesas;
+        }
+    }
+    
+    public class Cozinha extends Comodo{
+        private int tiposRefeicao;
+        private int qtdePanelas;
+
+        public Cozinha(int tiposRefeicao, int qtdePanelas) {
+            this.tiposRefeicao = tiposRefeicao;
+            this.qtdePanelas = qtdePanelas;
+        }
+
+        public int getTiposRefeicao() {
+            return tiposRefeicao;
+        }
+        public void setTiposRefeicao(int tiposRefeicao) {
+            this.tiposRefeicao = tiposRefeicao;
+        }
+        public int getQtdePanelas() {
+            return qtdePanelas;
+        }
+        public void setQtdePanelas(int qtdePanelas) {
+            this.qtdePanelas = qtdePanelas;
         }
     }
     
