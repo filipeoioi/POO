@@ -69,7 +69,7 @@ public class Principal {
 
         @Override
         public String toString() {
-            return "Restaurante{" + "qtdeCadeiras=" + this.getQtdeCadeiras() + ", qtdeMesas=" + this.getQtdeMesas() + '}';
+            return "Restaurante{" + "nome=" + this.getNome() + ", qtdeCadeiras=" + this.getQtdeCadeiras() + ", qtdeMesas=" + this.getQtdeMesas() + '}';
         }
     }
     
@@ -108,7 +108,7 @@ public class Principal {
 
         @Override
         public String toString() {
-            return "Cozinha{" + "tiposRefeicao=" + this.tiposRefeicao + ", qtdePanelas=" + this.getQtdePanelas() + '}';
+            return "Cozinha{" + "nome=" + this.getNome() + ", tiposRefeicao=" + this.getTiposRefeicao() + ", qtdePanelas=" + this.getQtdePanelas() + '}';
         }
     }
     
@@ -198,9 +198,9 @@ public class Principal {
     
     public void iniciar(){
         ArrayList<Comodo> lista = new ArrayList<>();
-        Comodo cozinha1 = new Cozinha(5, 12);
+        Comodo cozinha1 = new Cozinha(5, 12, "Cozinha1");
         Comodo cozinha2 = new Cozinha(2, 10);
-        Comodo restaurante1 = new Restaurante(12, 6);
+        Comodo restaurante1 = new Restaurante(12, 6, "Restaurante1");
         Comodo restaurante2 = new Restaurante(24, 12);
         
         lista.add(cozinha1);
