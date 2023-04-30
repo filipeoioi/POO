@@ -6,14 +6,15 @@ public class Principal {
     
     public interface IComodo{
         public abstract void emitirComanda(String pedido);
-        public abstract float calcularPagamento(String pedido, String valor);
+        public abstract float calcularPagamento(String pedido);
         public abstract void calcularCompras();
     }
     
     public class Comodo implements IComodo{
         private String nome;
         private static final ArrayList<String> pedidos = new ArrayList<>();
-        private static final ArrayList<String> valor = new ArrayList<>();
+        private static Float valorC;
+        private static String pedido;
         
         public Comodo(){
             this.nome = "";
@@ -34,6 +35,19 @@ public class Principal {
         public void setNome(String nome) {
             this.nome = nome;
         }
+        public void setValorC(Float valor){
+            Comodo.valorC = valor;
+        }
+        public Float getValorC(){
+            return Comodo.valorC;
+        }
+        public void setPedido(String pedido){
+            Comodo.pedido = pedido;
+        }
+        public String getPedido(){
+            return Comodo.pedido;
+        }
+            
         
         @Override
         public void emitirComanda(String pedido){
@@ -64,7 +78,32 @@ public class Principal {
             pedidos.clear();
         }
         @Override
-        public float calcularPagamento(String pedido, String valor){ return 0f;}
+        public float calcularPagamento(String pedido){ 
+            float valor = 0;
+            if (this.getClass().getSimpleName().equals("Restaurante")){
+                setPedido(pedido);
+                calcularPagamento();
+                valor = getValorC();
+            } else {
+                System.out.println("Cozinha não recebe pedido do principal");
+                valor = -999f;
+            }
+            return (valor + (valor*0.1f));
+        }
+        
+        public void calcularPagamento(){
+            String[][] pedidos = {{"Batata frita, X-Burguer, Refrigerante", "20"}, {"Porção de Batata Frita c/ Carne Bovina, Suco 2l", "35"}, 
+            {"Prato Executivo, Refrigerante Diet", "23"}, {"HotDog Completo, Refrigentante", "15"}, {"Misto-Quente, Café", "7"}};
+            String pedido = getPedido();
+            Float valor = 0f;
+            for (String[] pedido1 : pedidos) {
+                if (pedido1[0].equals(pedido)) {
+                    valor = Float.valueOf(pedido1[1]);
+                }
+            }
+            System.out.println("Valor em cozinha: R$ " + valor);
+            setValorC(valor);
+        }
         @Override 
         public void calcularCompras(){}
     }
@@ -127,6 +166,14 @@ public class Principal {
                 System.out.println("Pedido " + count + ": " + item);
             }
         }
+        
+        
+        @Override
+        public float calcularPagamento(String pedido){
+            float valor = super.calcularPagamento(pedido);
+            return valor;
+        }
+            
         
         @Override 
         public void calcularCompras(){
@@ -207,14 +254,6 @@ public class Principal {
                 System.out.println("\nALERTA: Necessário comprar mantimentos para cozinha");
             }
         }
-        
-        /*
-        public float calcularPagamento(String pedido){
-            String[][] pedidos = {{"Batata frita, X-Burguer, Refrigerante", "20"}, {"Porção de Batata Frita c/ Carne Bovina, Suco 2l", "35"}, 
-            {"Prato Executivo, Refrigerante Diet", "23"}, {"HotDog Completo, Refrigentante", "15"}, {"Misto-Quente, Café", "7"}};
-            
-            
-        }*/
         
         @Override
         public String toString() {
@@ -308,39 +347,32 @@ public class Principal {
     }
     
     public void iniciar(){
-        String[][] pedidos = {{"Batata frita, X-Burguer, Refrigerante", "20"}, {"Porção de Batata Frita c/ Carne Bovina, Suco 2l", "35"}, 
-            {"Prato Executivo, Refrigerante Diet", "23"}, {"HotDog Completo, Refrigentante", "15"}, {"Misto-Quente, Café", "7"}};
+        String[] pedidos = {"Batata frita, X-Burguer, Refrigerante", "Porção de Batata Frita c/ Carne Bovina, Suco 2l",  
+            "Prato Executivo, Refrigerante Diet", "HotDog Completo, Refrigentante", "Misto-Quente, Café"};
         Restaurante restaurante = new Restaurante(12, 6, "Restaurante do João");
         Cozinha cozinha = new Cozinha(5, 13, "Cozinha do João");
-        String pedido = "Prato Executivo, Refrigerante Diet";
-        restaurante.emitirComanda(pedidos[0][0]);
-        restaurante.emitirComanda(pedidos[1][0]);
+
+        restaurante.emitirComanda(pedidos[0]);
+        restaurante.emitirComanda(pedidos[1]);
         restaurante.exibirComanda();
         cozinha.emitirComanda();
-        restaurante.emitirComanda(pedidos[2][0]);
-        restaurante.emitirComanda(pedidos[3][0]);
+        restaurante.emitirComanda(pedidos[2]);
+        restaurante.emitirComanda(pedidos[3]);
         restaurante.exibirComanda();
-        restaurante.emitirComanda(pedidos[4][0]);
-        restaurante.emitirComanda(pedidos[4][0]);
-        restaurante.emitirComanda(pedidos[2][0]);
-        restaurante.emitirComanda(pedidos[0][0]);
-        restaurante.emitirComanda(pedidos[0][0]);
-        restaurante.emitirComanda(pedidos[0][0]);
-        restaurante.emitirComanda(pedidos[1][0]);
-        restaurante.emitirComanda(pedidos[3][0]);
-        restaurante.emitirComanda(pedidos[3][0]);
-        restaurante.emitirComanda(pedidos[2][0]);
-        restaurante.emitirComanda(pedidos[1][0]);
+        restaurante.emitirComanda(pedidos[4]);
+        restaurante.emitirComanda(pedidos[4]);
+        restaurante.emitirComanda(pedidos[2]);
+        restaurante.emitirComanda(pedidos[0]);
+        restaurante.emitirComanda(pedidos[0]);
+        restaurante.emitirComanda(pedidos[0]);
+        restaurante.emitirComanda(pedidos[1]);
+        restaurante.emitirComanda(pedidos[3]);
+        restaurante.emitirComanda(pedidos[3]);
+        restaurante.emitirComanda(pedidos[2]);
+        restaurante.emitirComanda(pedidos[1]);
         cozinha.emitirComanda();
         
-        //restaurante.calculaPagamento(pedidos[0]);
-        Float valor = 0f;
-        for (String[] pedido1 : pedidos) {
-            if (pedido1[0].equals(pedido)) {
-                valor = Float.valueOf(pedido1[1]);
-            }
-        }
-        System.out.println(valor);
+        System.out.println("Valor em restaurante: R$ " + restaurante.calcularPagamento(pedidos[0]));
     }
     
     public static void main(String[] args) {
