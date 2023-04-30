@@ -5,13 +5,14 @@ import java.util.ArrayList;
 public class Principal {
     
     public interface IComodo{
-        public abstract void emitirComanda();
+        public abstract void emitirComanda(String pedido); //Fazer recebendo 3 paramentros: pedido, restaurante, cozinha.
         public abstract void calcularPagamento();
         public abstract void calcularCompras();
     }
     
     public class Comodo implements IComodo{
         private String nome;
+        private static final ArrayList<String> pedidos = new ArrayList<>();
         
         public Comodo(){
             this.nome = "";
@@ -19,7 +20,13 @@ public class Principal {
         public Comodo(String nome) {
             this.nome = nome;
         }
-        
+
+        public ArrayList<String> getPedidos() {
+            return pedidos;
+        }
+        public void setPedidos(String pedido) {
+            pedidos.add(pedido);
+        }
         public String getNome() {
             return nome;
         }
@@ -27,8 +34,11 @@ public class Principal {
             this.nome = nome;
         }
         
+        public void limparComanda(){
+            pedidos.clear();
+        }
         @Override
-        public void emitirComanda(){}
+        public void emitirComanda(String pedido){}
         @Override
         public void calcularPagamento(){}
         @Override 
@@ -66,7 +76,21 @@ public class Principal {
         public void setQtdeMesas(int qtdeMesas) {
             this.qtdeMesas = qtdeMesas;
         }
-
+        
+        @Override
+        public void emitirComanda(String pedido){
+            this.setPedidos(pedido);
+        }
+        public void exibirComanda(){
+            ArrayList<String> pedidos = this.getPedidos();
+            int count = 0;
+            System.out.println("\nPedidos até o momento: ");
+            for (String item : pedidos){
+                count++;
+                System.out.println("Pedido " + count + ": " + item);
+            }
+        }
+        
         @Override
         public String toString() {
             return "Restaurante{" + "nome=" + this.getNome() + ", qtdeCadeiras=" + this.getQtdeCadeiras() + ", qtdeMesas=" + this.getQtdeMesas() + '}';
@@ -105,7 +129,20 @@ public class Principal {
         public void setQtdePanelas(int qtdePanelas) {
             this.qtdePanelas = qtdePanelas;
         }
-
+        
+        public void emitirComanda(){
+            ArrayList<String> pedidosC = getPedidos();
+            if (!(pedidosC.isEmpty())){
+                int countC = 0;
+                System.out.println("");
+                for (String item : pedidosC){
+                    countC++;
+                    System.out.println("Fazendo o pedido " + countC + ": " + item);
+                }
+                super.limparComanda();
+            }
+        }
+        
         @Override
         public String toString() {
             return "Cozinha{" + "nome=" + this.getNome() + ", tiposRefeicao=" + this.getTiposRefeicao() + ", qtdePanelas=" + this.getQtdePanelas() + '}';
@@ -208,9 +245,17 @@ public class Principal {
         lista.add(cozinha2);
         lista.add(restaurante2);
         
+        System.out.println("Item 1:");
         for (Comodo comodo : lista){
             System.out.println(comodo);
         }
+        
+        System.out.println("\nItem 2:");
+        restaurante1.emitirComanda("Batata frita, X-Burguer, Refrigerante");
+        restaurante1.emitirComanda("Porção de Batata Frita c/ Carne Bovina, Suco 2l");
+        restaurante1.emitirComanda("Prato Executivo, Refrigerante Diet");
+        ((Restaurante) restaurante1).exibirComanda();
+        ((Cozinha) cozinha1).emitirComanda();
     }
     
     public static void main(String[] args) {
