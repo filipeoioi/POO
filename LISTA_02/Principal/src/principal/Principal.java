@@ -38,7 +38,21 @@ public class Principal {
             pedidos.clear();
         }
         @Override
-        public void emitirComanda(String pedido){}
+        public void emitirComanda(String pedido){
+            this.setPedidos(pedido);
+        }
+        public void emitirComanda(){
+            ArrayList<String> pedidosC = getPedidos();
+            if (!(pedidosC.isEmpty())){
+                int countC = 0;
+                System.out.println("");
+                for (String item : pedidosC){
+                    countC++;
+                    System.out.println("Fazendo o pedido " + countC + ": " + item);
+                }
+                this.limparComanda();
+            }
+        } 
         @Override
         public void calcularPagamento(){}
         @Override 
@@ -253,9 +267,10 @@ public class Principal {
         System.out.println("\nItem 2:");
         restaurante1.emitirComanda("Batata frita, X-Burguer, Refrigerante");
         restaurante1.emitirComanda("Porção de Batata Frita c/ Carne Bovina, Suco 2l");
+        ((Restaurante) restaurante1).exibirComanda();
+        cozinha1.emitirComanda();
         restaurante1.emitirComanda("Prato Executivo, Refrigerante Diet");
         ((Restaurante) restaurante1).exibirComanda();
-        ((Cozinha) cozinha1).emitirComanda();
     }
     
     public static void main(String[] args) {
