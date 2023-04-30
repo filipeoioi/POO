@@ -5,14 +5,15 @@ import java.util.ArrayList;
 public class Principal {
     
     public interface IComodo{
-        public abstract void emitirComanda(String pedido); //Fazer recebendo 3 paramentros: pedido, restaurante, cozinha.
-        public abstract void calcularPagamento();
+        public abstract void emitirComanda(String pedido);
+        public abstract float calcularPagamento(String pedido, String valor);
         public abstract void calcularCompras();
     }
     
     public class Comodo implements IComodo{
         private String nome;
         private static final ArrayList<String> pedidos = new ArrayList<>();
+        private static final ArrayList<String> valor = new ArrayList<>();
         
         public Comodo(){
             this.nome = "";
@@ -34,27 +35,36 @@ public class Principal {
             this.nome = nome;
         }
         
+        @Override
+        public void emitirComanda(String pedido){
+            if (this.getClass().getSimpleName().equals("Restaurante")){
+                this.setPedidos(pedido);
+            } else {
+                System.out.println("Cozinha não anota pedido.");
+            }
+        }
+        public void emitirComanda(){
+            if (this.getClass().getSimpleName().equals("Cozinha")){
+                ArrayList<String> pedidosC = getPedidos();
+                if (!(pedidosC.isEmpty())){
+                    int countC = 0;
+                    System.out.println("");
+                    for (String item : pedidosC){
+                        countC++;
+                        System.out.println("Fazendo o pedido " + countC + ": " + item);
+                    }
+                    this.limparComanda();
+                }
+            } else {
+                System.out.println("Restaurante não prepara pedido.");
+            }
+            
+        } 
         public void limparComanda(){
             pedidos.clear();
         }
         @Override
-        public void emitirComanda(String pedido){
-            this.setPedidos(pedido);
-        }
-        public void emitirComanda(){
-            ArrayList<String> pedidosC = getPedidos();
-            if (!(pedidosC.isEmpty())){
-                int countC = 0;
-                System.out.println("");
-                for (String item : pedidosC){
-                    countC++;
-                    System.out.println("Fazendo o pedido " + countC + ": " + item);
-                }
-                this.limparComanda();
-            }
-        } 
-        @Override
-        public void calcularPagamento(){}
+        public float calcularPagamento(String pedido, String valor){ return 0f;}
         @Override 
         public void calcularCompras(){}
     }
@@ -62,20 +72,24 @@ public class Principal {
     public class Restaurante extends Comodo{
         private int qtdeCadeiras;
         private int qtdeMesas;
+        private int qtdePedidos;
 
         public Restaurante() {
             this.qtdeCadeiras = 0;
             this.qtdeMesas = 0;
+            this.qtdePedidos = 0;
         }
         public Restaurante(int qtdeCadeiras, int qtdeMesas) {
             super();
             this.qtdeCadeiras = qtdeCadeiras;
             this.qtdeMesas = qtdeMesas;
+            this.qtdePedidos = 0;
         }
         public Restaurante(int qtdeCadeiras, int qtdeMesas, String nome) {
             super(nome);
             this.qtdeCadeiras = qtdeCadeiras;
             this.qtdeMesas = qtdeMesas;
+            this.qtdePedidos = 0;
         }
 
         public int getQtdeCadeiras() {
@@ -90,10 +104,19 @@ public class Principal {
         public void setQtdeMesas(int qtdeMesas) {
             this.qtdeMesas = qtdeMesas;
         }
+        public int getQtdePedidos() {
+            return qtdePedidos;
+        }
+        public void setQtdePedidos(int qtdePedidos) {
+            this.qtdePedidos = qtdePedidos;
+        }
+        
         
         @Override
         public void emitirComanda(String pedido){
             this.setPedidos(pedido);
+            this.setQtdePedidos(this.getQtdePedidos() + 1);
+            this.calcularCompras();
         }
         public void exibirComanda(){
             ArrayList<String> pedidos = this.getPedidos();
@@ -102,6 +125,13 @@ public class Principal {
             for (String item : pedidos){
                 count++;
                 System.out.println("Pedido " + count + ": " + item);
+            }
+        }
+        
+        @Override 
+        public void calcularCompras(){
+            if (this.getQtdePedidos() >= 10){
+                System.out.println("\nALERTA: Necessário comprar mantimentos para o restaurante");
             }
         }
         
@@ -114,21 +144,25 @@ public class Principal {
     public class Cozinha extends Comodo{
         private int tiposRefeicao;
         private int qtdePanelas;
+        private int qtdeRefeicoes;
 
         public Cozinha() {
             super();
             this.qtdePanelas = 0;
             this.tiposRefeicao = 0;
+            this.qtdeRefeicoes = 0;
         }
         public Cozinha(int tiposRefeicao, int qtdePanelas) {
             super();
             this.tiposRefeicao = tiposRefeicao;
             this.qtdePanelas = qtdePanelas;
+            this.qtdeRefeicoes = 0;
         }
         public Cozinha(int tiposRefeicao, int qtdePanelas, String nome) {
             super(nome);
             this.tiposRefeicao = tiposRefeicao;
             this.qtdePanelas = qtdePanelas;
+            this.qtdeRefeicoes = 0;
         }
         
         public int getTiposRefeicao() {
@@ -143,7 +177,15 @@ public class Principal {
         public void setQtdePanelas(int qtdePanelas) {
             this.qtdePanelas = qtdePanelas;
         }
+        public int getQtdeRefeicoes() {
+            return qtdeRefeicoes;
+        }
+        public void setQtdeRefeicoes(int qtdeRefeicoes) {
+            this.qtdeRefeicoes = qtdeRefeicoes;
+        }
         
+        
+        @Override
         public void emitirComanda(){
             ArrayList<String> pedidosC = getPedidos();
             if (!(pedidosC.isEmpty())){
@@ -152,10 +194,27 @@ public class Principal {
                 for (String item : pedidosC){
                     countC++;
                     System.out.println("Fazendo o pedido " + countC + ": " + item);
+                    this.setQtdeRefeicoes(this.getQtdeRefeicoes() + 1);
+                    this.calcularCompras();
                 }
                 super.limparComanda();
             }
         }
+        
+        @Override
+        public void calcularCompras(){
+            if (this.getQtdeRefeicoes() >= 15){
+                System.out.println("\nALERTA: Necessário comprar mantimentos para cozinha");
+            }
+        }
+        
+        /*
+        public float calcularPagamento(String pedido){
+            String[][] pedidos = {{"Batata frita, X-Burguer, Refrigerante", "20"}, {"Porção de Batata Frita c/ Carne Bovina, Suco 2l", "35"}, 
+            {"Prato Executivo, Refrigerante Diet", "23"}, {"HotDog Completo, Refrigentante", "15"}, {"Misto-Quente, Café", "7"}};
+            
+            
+        }*/
         
         @Override
         public String toString() {
@@ -181,7 +240,8 @@ public class Principal {
             this.qtdeMaxPaes = 0;
             this.qtdeFuncionarios = 0;
         }
-        public Padaria(String nome, String dono, String endereco, float vendasMensais, int qtdeMaxPaes, int qtdeFuncionarios, ArrayList<Cozinha> cozinha, ArrayList<Restaurante> restaurante) {
+        public Padaria(String nome, String dono, String endereco, float vendasMensais, int qtdeMaxPaes, 
+                int qtdeFuncionarios, ArrayList<Cozinha> cozinha, ArrayList<Restaurante> restaurante) {
             this.nome = nome;
             this.dono = dono;
             this.endereco = endereco;
@@ -248,29 +308,39 @@ public class Principal {
     }
     
     public void iniciar(){
-        ArrayList<Comodo> lista = new ArrayList<>();
-        Comodo cozinha1 = new Cozinha(5, 12, "Cozinha1");
-        Comodo cozinha2 = new Cozinha(2, 10);
-        Comodo restaurante1 = new Restaurante(12, 6, "Restaurante1");
-        Comodo restaurante2 = new Restaurante(24, 12);
+        String[][] pedidos = {{"Batata frita, X-Burguer, Refrigerante", "20"}, {"Porção de Batata Frita c/ Carne Bovina, Suco 2l", "35"}, 
+            {"Prato Executivo, Refrigerante Diet", "23"}, {"HotDog Completo, Refrigentante", "15"}, {"Misto-Quente, Café", "7"}};
+        Restaurante restaurante = new Restaurante(12, 6, "Restaurante do João");
+        Cozinha cozinha = new Cozinha(5, 13, "Cozinha do João");
+        String pedido = "Prato Executivo, Refrigerante Diet";
+        restaurante.emitirComanda(pedidos[0][0]);
+        restaurante.emitirComanda(pedidos[1][0]);
+        restaurante.exibirComanda();
+        cozinha.emitirComanda();
+        restaurante.emitirComanda(pedidos[2][0]);
+        restaurante.emitirComanda(pedidos[3][0]);
+        restaurante.exibirComanda();
+        restaurante.emitirComanda(pedidos[4][0]);
+        restaurante.emitirComanda(pedidos[4][0]);
+        restaurante.emitirComanda(pedidos[2][0]);
+        restaurante.emitirComanda(pedidos[0][0]);
+        restaurante.emitirComanda(pedidos[0][0]);
+        restaurante.emitirComanda(pedidos[0][0]);
+        restaurante.emitirComanda(pedidos[1][0]);
+        restaurante.emitirComanda(pedidos[3][0]);
+        restaurante.emitirComanda(pedidos[3][0]);
+        restaurante.emitirComanda(pedidos[2][0]);
+        restaurante.emitirComanda(pedidos[1][0]);
+        cozinha.emitirComanda();
         
-        lista.add(cozinha1);
-        lista.add(restaurante1);
-        lista.add(cozinha2);
-        lista.add(restaurante2);
-        
-        System.out.println("Item 1:");
-        for (Comodo comodo : lista){
-            System.out.println(comodo);
+        //restaurante.calculaPagamento(pedidos[0]);
+        Float valor = 0f;
+        for (String[] pedido1 : pedidos) {
+            if (pedido1[0].equals(pedido)) {
+                valor = Float.valueOf(pedido1[1]);
+            }
         }
-        
-        System.out.println("\nItem 2:");
-        restaurante1.emitirComanda("Batata frita, X-Burguer, Refrigerante");
-        restaurante1.emitirComanda("Porção de Batata Frita c/ Carne Bovina, Suco 2l");
-        ((Restaurante) restaurante1).exibirComanda();
-        cozinha1.emitirComanda();
-        restaurante1.emitirComanda("Prato Executivo, Refrigerante Diet");
-        ((Restaurante) restaurante1).exibirComanda();
+        System.out.println(valor);
     }
     
     public static void main(String[] args) {
