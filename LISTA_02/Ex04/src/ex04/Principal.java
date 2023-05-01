@@ -1,5 +1,11 @@
 package ex04;
 
+/*
+Exercicio 04
+Autor(es): Filipe Augusto Parreira Almeida
+Data: 01/05/2023
+*/
+
 import java.util.ArrayList;
 
 public class Principal {

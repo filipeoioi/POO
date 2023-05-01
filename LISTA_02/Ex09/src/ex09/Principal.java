@@ -1,5 +1,11 @@
 package ex09;
 
+/*
+Exercicio 09
+Autor(es): Filipe Augusto Parreira Almeida
+Data: 01/05/2023
+*/
+
 import java.io.IOException;
 
 public class Principal {

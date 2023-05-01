@@ -1,5 +1,11 @@
 package ex08;
 
+/*
+Exercicio 08
+Autor(es): Filipe Augusto Parreira Almeida
+Data: 01/05/2023
+*/
+
 public class Principal {
     
     public class ExceptionA extends Exception{

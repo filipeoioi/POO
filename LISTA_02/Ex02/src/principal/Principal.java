@@ -1,5 +1,11 @@
 package principal;
 
+/*
+Exercicio 02
+Autor(es): Filipe Augusto Parreira Almeida
+Data: 01/05/2023
+*/
+
 import java.util.ArrayList;
 
 public class Principal {
