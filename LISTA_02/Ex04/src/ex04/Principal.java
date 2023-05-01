@@ -1,4 +1,4 @@
-package principal;
+package ex04;
 
 import java.util.ArrayList;
 
@@ -8,6 +8,60 @@ public class Principal {
         public abstract void emitirComanda();
         public abstract void calcularPagamento();
         public abstract void calcularCompras();
+    }
+    
+    public interface IMoeda{
+        public void calcularTroco(float valorPago, float valorCompra);
+    }
+    
+    public class Euro implements IMoeda{
+        private float valorAtual;
+        
+        public Euro(){
+            this.valorAtual = 5.47f;
+        }
+                
+        @Override
+        public void calcularTroco(float valorPago, float valorCompra){
+            float valorReal = valorPago * this.valorAtual;
+            float troco = valorReal - valorCompra;
+            if (troco < 0){
+                System.out.printf("Está faltando R$ %.2f ou Є %.2f\n", (troco*-1), ((troco*-1)/this.valorAtual));
+            } else {
+                System.out.printf("O troco é de R$ %.2f ou Є %.2f\n", troco, (troco/this.valorAtual));
+            }
+        } 
+    }
+    
+    public class Real implements IMoeda{
+        @Override
+        public void calcularTroco(float valorPago, float valorCompra){
+            float troco = valorPago - valorCompra;
+            if (troco < 0){
+                System.out.printf("Está faltando R$ %.2f\n", (troco*-1));
+            } else{
+                System.out.printf("O troco é de R$ %.2f\n", troco);
+            }
+        }
+    }
+    
+    public class BitCoin implements IMoeda{
+        private float valorAtual;
+        
+        public BitCoin(){
+            this.valorAtual = 140276.17f;
+        }
+        
+        @Override
+        public void calcularTroco(float valorPago, float valorCompra){
+            float valorReal = valorPago * this.valorAtual;
+            float troco = valorReal - valorCompra;
+            if (troco < 0){
+                System.out.printf("Está faltando R$ %.2f ou %.2f BTC\n", (troco*-1), ((troco*-1)/this.valorAtual));
+            } else {
+                System.out.printf("O troco é de R$ %.2f ou %.7f BTC\n", troco, troco/this.valorAtual);
+            }
+        }        
     }
     
     public class Comodo implements IComodo{
@@ -198,20 +252,28 @@ public class Principal {
     }
     
     public void iniciar(){
-        ArrayList<Comodo> lista = new ArrayList<>();
-        Comodo cozinha1 = new Cozinha(5, 12, "Cozinha1");
-        Comodo cozinha2 = new Cozinha(2, 10);
-        Comodo restaurante1 = new Restaurante(12, 6, "Restaurante1");
-        Comodo restaurante2 = new Restaurante(24, 12);
+        ArrayList<IMoeda> moedas = new ArrayList<>();
+        moedas.add(new Real());
+        moedas.add(new Euro());
+        moedas.add(new BitCoin());
         
-        lista.add(cozinha1);
-        lista.add(restaurante1);
-        lista.add(cozinha2);
-        lista.add(restaurante2);
+        float valorCompra = 45.2f;
+        float valorReal = 50f;
+        float valorEuro = 9.14f;
+        float valorBTC = 0.00036f;
         
-        for (Comodo comodo : lista){
-            System.out.println(comodo);
+        for (IMoeda item : moedas){
+            if (item.getClass().getSimpleName().equals("Real")){
+                item.calcularTroco(valorReal, valorCompra);
+            }
+            if (item.getClass().getSimpleName().equals("Euro")){
+                item.calcularTroco(valorEuro, valorCompra);
+            }
+            if (item.getClass().getSimpleName().equals("BitCoin")){
+                item.calcularTroco(valorBTC, valorCompra);
+            }
         }
+        
     }
     
     public static void main(String[] args) {
