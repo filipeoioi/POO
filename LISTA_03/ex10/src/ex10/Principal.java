@@ -52,8 +52,13 @@ public class Principal {
         }
     }
     
-    public class Visitante extends Prefeitura implements IPrefeitura{
-
+    public class Visitante implements IPrefeitura{
+        
+        @Override
+        public boolean prepararRefeicao() {
+            return true;
+        }
+        
         @Override 
         public boolean lerSaldo(){
             boolean result = false;
@@ -65,12 +70,23 @@ public class Principal {
             }
             return result;
         }
+        
+        @Override
+        public boolean lerCracha() {
+            boolean result = false;
+            Scanner entrada = new Scanner(System.in);
+            System.out.print("Ler cracha:");
+            boolean presente = entrada.nextBoolean();
+            if (presente) {
+                result = true;
+            }
+            return result;
+        }
     }
     
     public void iniciar() {
         IPrefeitura RU = new Prefeitura();
         System.out.println("----" + RU.getClass().getSimpleName() + "----");
-        
         boolean v1 = RU.prepararRefeicao();
         boolean v2 = RU.lerSaldo();
         boolean v3 = RU.lerCracha();
@@ -80,9 +96,8 @@ public class Principal {
             System.out.println("Acesso não-autorizado.");
         }
 
-        System.out.println("\n----" + RU.getClass().getSimpleName() + "----");
-        
         RU = new Visitante();
+        System.out.println("\n----" + RU.getClass().getSimpleName() + "----");
         v1 = RU.prepararRefeicao();
         v2 = RU.lerSaldo();
         v3 = RU.lerCracha();
