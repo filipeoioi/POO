@@ -1,12 +1,20 @@
 package ex07;
 
-import javax.swing.*;
-import java.awt.*;
+/*
+Exercicio 07
+Autor(es): Filipe Augusto Parreira Almeida
+Data: 15/06/2023
+*/
+
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class Ex07 extends JFrame {
       

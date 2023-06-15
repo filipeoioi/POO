@@ -1,5 +1,11 @@
 package ex08;
 
+/*
+Exercicio 08
+Autor(es): Filipe Augusto Parreira Almeida
+Data: 15/06/2023
+*/
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,9 +19,11 @@ public class Ex08 extends JFrame {
     private JButton botaoJanela;
 
     public class JanelaListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e){
           Janela janela = Janela.iniciar();
           janela.addWindowListener(new WindowAdapter(){
+              @Override
               public void windowClosing(WindowEvent e){
                   Janela.fechar();
               }
@@ -23,11 +31,8 @@ public class Ex08 extends JFrame {
         }
     }
     
-    
     public Ex08(){
-     
         setLayout(new FlowLayout());       
-        
         botaoJanela = new JButton("Cadastrar Funcionario");
         botaoJanela.addActionListener(new JanelaListener());
         add(botaoJanela);

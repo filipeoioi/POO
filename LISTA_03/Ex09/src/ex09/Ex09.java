@@ -1,9 +1,14 @@
 package ex09;
 
+/*
+Exercicio 09
+Autor(es): Filipe Augusto Parreira Almeida
+Data: 15/06/2023
+*/
+
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -13,10 +18,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class Ex09 extends JFrame{
+    private ButtonGroup grupoBotoes;
+    private JRadioButton radioMasculino;
+    private JRadioButton radioFeminino;
+    private JButton botaoCadastrar;
     private JLabel labelNome;
     private JLabel labelCargo;
     private JTextField campoNome;
     private JTextField campoCargo;
+    private Genero generoSelecionado;
     
     public class GeneroMasculino implements Genero {
         @Override
@@ -24,24 +34,18 @@ public class Ex09 extends JFrame{
             return "Masculino";
         }
     }
-
     public class GeneroFeminino implements Genero {
         @Override
         public String getDescricao() {
             return "Feminino";
         }
     }
-    
-    private Genero generoSelecionado;
 
     public Ex09() {
-        //JFrame janela = new JFrame("Cadastro de Funcionário");
-        
+        grupoBotoes = new ButtonGroup();
 
-        ButtonGroup grupoBotoes = new ButtonGroup();
-
-        JRadioButton radioMasculino = new JRadioButton("Masculino");
-        JRadioButton radioFeminino = new JRadioButton("Feminino");
+        radioMasculino = new JRadioButton("Masculino");
+        radioFeminino = new JRadioButton("Feminino");
 
         grupoBotoes.add(radioMasculino);
         grupoBotoes.add(radioFeminino);
@@ -51,7 +55,7 @@ public class Ex09 extends JFrame{
         labelNome = new JLabel("Nome: ");
         labelCargo = new JLabel("Cargo: ");
 
-        JButton botaoCadastrar = new JButton("Cadastrar");
+        botaoCadastrar = new JButton("Cadastrar");
 
         botaoCadastrar.addActionListener(new ActionListener() {
             @Override
@@ -61,11 +65,9 @@ public class Ex09 extends JFrame{
                 } else if (radioFeminino.isSelected()) {
                     generoSelecionado = new GeneroFeminino();
                 }
-
                 cadastrarFuncionario();
             }
         });
-        
         
         add(labelNome);
         add(campoNome);
@@ -74,9 +76,6 @@ public class Ex09 extends JFrame{
         add(radioMasculino);
         add(radioFeminino);
         add(botaoCadastrar);
-
-        
-        
     }
 
     private void cadastrarFuncionario() {
@@ -88,7 +87,6 @@ public class Ex09 extends JFrame{
         
     }
 
-       
     public static void main(String[] args) {
         Ex09 principal = new Ex09();
         principal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

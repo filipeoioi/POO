@@ -1,5 +1,11 @@
 package ex08;
 
+/*
+Exercicio 08
+Autor(es): Filipe Augusto Parreira Almeida
+Data: 15/06/2023
+*/
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -75,7 +81,6 @@ public class Janela extends JFrame {
         add(labelDepartamento);
         add(campoDepartamento);
         add(botaoCadastrar);
-        
     }
 }
 
