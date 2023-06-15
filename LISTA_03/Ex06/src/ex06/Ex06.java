@@ -1,5 +1,11 @@
 package ex06;
 
+/*
+Exercicio 06
+Autor(es): Filipe Augusto Parreira
+Data: 15/06/2023
+*/
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -14,17 +20,15 @@ public class Ex06 {
         }
 
         public boolean criarFuncionario(String nome, String cargo, double salario, String departamento) {
-            // Verificar se o funcionário já existe
             for (Funcionario funcionario : funcionarios) {
                 if (funcionario.getNome().equals(nome)) {
-                    return false; // Já existe um funcionário com esse nome
+                    return false;
                 }
             }
 
-            // Criar o novo funcionário e adicioná-lo à lista
             Funcionario novoFuncionario = new Funcionario(nome, cargo, salario, departamento);
             funcionarios.add(novoFuncionario);
-            return true; // Funcionário criado com sucesso
+            return true;
         }
 
         public List<Funcionario> listarFuncionarios() {
@@ -40,16 +44,13 @@ public class Ex06 {
         }
 
         public void cadastrarFuncionario() {
-            // Solicitar os dados do funcionário usando JOptionPane
             String nome = JOptionPane.showInputDialog("Digite o nome do funcionário:");
             String cargo = JOptionPane.showInputDialog("Digite o cargo do funcionário:");
             double salario = Double.parseDouble(JOptionPane.showInputDialog("Digite o salário do funcionário:"));
             String departamento = JOptionPane.showInputDialog("Digite o departamento do funcionário:");
 
-            // Criar o funcionário usando o FuncionarioController
             boolean sucesso = funcionarioController.criarFuncionario(nome, cargo, salario, departamento);
 
-            // Exibir mensagem de sucesso ou erro usando JOptionPane
             if (sucesso) {
                 JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!");
             } else {
