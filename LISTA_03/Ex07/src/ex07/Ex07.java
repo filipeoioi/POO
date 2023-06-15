@@ -10,23 +10,22 @@ import java.util.List;
 
 public class Ex07 extends JFrame {
       
-    public static class FuncionarioCollection{
+    public static class ListaFuncionarios{
         private List<Funcionario> funcionarios;
 
-        public FuncionarioCollection() {
+        public ListaFuncionarios() {
             this.funcionarios = new ArrayList<>();
         }
 
         public void adicionarFuncionario(Funcionario funcionario) {
             funcionarios.add(funcionario);
         }
-
         public Iterator<Funcionario> criarIterator() {
             return funcionarios.iterator();
         }
     }
     
-    private FuncionarioCollection funcionarios;
+    private ListaFuncionarios funcionarios;
     private Iterator<Funcionario> iterator;
     private JLabel labelNome;
     private JLabel labelNome1;
@@ -35,7 +34,7 @@ public class Ex07 extends JFrame {
     private JButton botaoProximo;
 
     public Ex07() {
-        funcionarios = new FuncionarioCollection();
+        funcionarios = new ListaFuncionarios();
         
         funcionarios.adicionarFuncionario(new Funcionario("João", "Administrativo", 1500, "Administração"));
         funcionarios.adicionarFuncionario(new Funcionario("Maria", "Técnica", 1300, "T.I"));
@@ -44,8 +43,8 @@ public class Ex07 extends JFrame {
         
         labelNome = new JLabel();
         labelCargo = new JLabel();
-        labelNome1 = new JLabel("Nome: ");
-        labelCargo1 = new JLabel("Cargo: ");
+        labelNome1 = new JLabel("Lista De Funcionarios Cadastrados");
+        labelCargo1 = new JLabel("");
         botaoProximo = new JButton("Próximo");
         
         botaoProximo.addActionListener(new ActionListener() {
@@ -53,6 +52,8 @@ public class Ex07 extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (iterator.hasNext()) {
                     Funcionario funcionario = iterator.next();
+                    labelNome1.setText("Nome: ");
+                    labelCargo1.setText("Cargo: ");
                     labelNome.setText(funcionario.getNome());
                     labelCargo.setText(funcionario.getCargo());
                 } else {
@@ -70,18 +71,12 @@ public class Ex07 extends JFrame {
         add(labelCargo1);
         add(labelCargo);
         add(botaoProximo);
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(300, 200);
-        setVisible(true);
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Ex07();
-            }
-        });
+        Ex07 principal = new Ex07();
+        principal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        principal.setSize(300, 200);
+        principal.setVisible(true);
     }
 }
