@@ -126,7 +126,7 @@
       <packagedElement xmi:type="uml:Class" xmi:id="uPIurVU1gGQ5w" name="boolean"/>
       <xmi:Extension extender="umbrello">
         <diagrams resolution="96">
-          <diagram xmi.id="uvL16Caavwbap" name="diagrama de classe" type="1" documentation="" backgroundcolor="#ffffff" fillcolor="#ffffc0" font="Sans Serif,9,-1,5,50,0,0,0,0,0" griddotcolor="#d3d3d3" linecolor="#990000" linewidth="0" textcolor="#000000" usefillcolor="1" showattribassocs="1" showatts="1" showattsig="1" showops="1" showopsig="1" showpackage="1" showpubliconly="0" showscope="1" showstereotype="2" localid="-1" showgrid="0" snapgrid="0" snapcsgrid="0" snapx="25" snapy="25" zoom="83" canvasheight="800" canvaswidth="1100" isopen="0">
+          <diagram xmi.id="uvL16Caavwbap" name="diagrama de classe" type="1" documentation="" backgroundcolor="#ffffff" fillcolor="#ffffc0" font="Sans Serif,9,-1,5,50,0,0,0,0,0" griddotcolor="#d3d3d3" linecolor="#990000" linewidth="0" textcolor="#000000" usefillcolor="1" showattribassocs="1" showatts="1" showattsig="1" showops="1" showopsig="1" showpackage="1" showpubliconly="0" showscope="1" showstereotype="2" localid="-1" showgrid="0" snapgrid="0" snapcsgrid="0" snapx="25" snapy="25" zoom="83" canvasheight="800" canvaswidth="1100" isopen="1">
             <widgets>
               <classwidget xmi.id="u2Q19zOTCIiEr" localid="u4HiZYIYjPhdT" textcolor="#000000" linecolor="#990000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="0" usesdiagramusefillcolor="0" fillcolor="#ffffc0" font="Sans Serif,9,-1,5,50,0,0,0,0,0" autoresize="0" x="673.807" y="295.158" width="305.205" height="98" isinstance="0" showstereotype="2" showoperations="1" showpubliconly="0" showopsigs="601" showpackage="1" showscope="1" showattributes="1" showattsigs="601"/>
               <classwidget xmi.id="u3GcMh3aZqQXg" localid="u2nun66FDNbR6" textcolor="#000000" linecolor="#990000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="0" usesdiagramusefillcolor="0" fillcolor="#ffffc0" font="Sans Serif,9,-1,5,50,0,0,0,0,0" autoresize="0" x="309.758" y="295.243" width="308" height="84.1429" isinstance="0" showstereotype="2" showoperations="1" showpubliconly="0" showopsigs="601" showpackage="1" showscope="1" showattributes="1" showattsigs="601"/>
@@ -856,7 +856,7 @@
     <packagedElement xmi:type="uml:Model" xmi:id="Entity_Relationship_Model" name="Entity Relationship Model"/>
   </uml:Model>
   <xmi:Extension extender="umbrello">
-    <docsettings viewid="u2PYrA2ZWu4Dn" documentation="" uniqueid="u3Ew62Vvc1kw3"/>
+    <docsettings viewid="uvL16Caavwbap" documentation="" uniqueid="utxOUE7095euH"/>
     <listview>
       <listitem id="Views" type="800" open="1">
         <listitem id="Entity_Relationship_Model" type="836" open="1"/>
@@ -935,10 +935,7 @@
           <listitem id="Datatypes" type="830" open="0">
             <listitem id="uEJJHJUDZHLNm" type="829" open="1"/>
             <listitem id="uuo9quEcgeaCF" type="829" open="0"/>
-            <listitem id="uBzFQb5MKK6OM" type="829" open="0"/>
             <listitem id="utO4i4KS0SrGi" type="829" open="0"/>
-            <listitem id="uhWtfvgOrhhjm" type="829" open="0"/>
-            <listitem id="uEA1grTVG44jm" type="829" open="0"/>
             <listitem id="ujQuHvFz029dK" type="829" open="0"/>
             <listitem id="uH8VC4PhDCUrk" type="829" open="0"/>
             <listitem id="uv5vopDHehQw4" type="829" open="0"/>
